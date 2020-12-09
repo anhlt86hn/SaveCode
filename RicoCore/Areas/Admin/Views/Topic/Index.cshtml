@@ -1,0 +1,19 @@
+﻿@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+    <link href="~/client-side/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/client-side/css/ResponsiveStyle.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/post/image-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/quantity-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/whole-price-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/detail.js" asp-append-version="true"></script>
+    <script>
+        var topic = new postDetailController();
+        topic.initialize();
+    </script>
+}
+
+<partial name="_ViewData.cshtml" />

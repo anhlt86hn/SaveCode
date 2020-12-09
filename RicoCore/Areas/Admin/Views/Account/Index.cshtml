@@ -1,0 +1,162 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using AspNetCore.Authorization
+@using RicoCore.Areas.Admin.Models
+@model PagedResultAccountViewModel
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Danh sách tài khoản";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+    <link href="~/client-side/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/client-side/css/ResponsiveStyle.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/account/index.js"></script>
+    <script>
+        var account = new accountController();
+        account.initialize();
+    </script>
+}
+<div class="row">
+    <div class="col-xs-12"><h1>Tài khoản</h1></div>
+</div>
+
+<div class="row">
+    <div class="col-md-auto col-sm-auto col-xs-12">
+        @{
+            var result = await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Create);
+        }
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12 text-xl-center text-md-center text-sm-center">
+                @if (result.Succeeded)
+                {
+                    @*<button id="btnCreate" class="btn btn-success">Tạo mới</button>*@
+                    <a href="/Admin/Account/Create" class="btn btn-info"><i class="fa fa-plus"></i><span class="hidden-xs"> Thêm mới </span></a>
+                    <a class="btn btn-danger" href="~/templates/AccountImportTemplate.xlsx">Mẫu nhập (Excel)</a>
+                    <button class="btn btn-primary" id="btn-import" type="button"><i class="fa fa-file-excel-o"></i>Nhập (Excel)</button>
+                    <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i>Xuất file (Excel)</button>
+                }
+                @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+                {
+                    <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                        <i class="fa fa-trash-o"></i> Xóa nhiều
+                    </button>
+                }
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 float-left">
+                <form method="get">
+                    <label>Sắp xếp:</label>
+                    <select name="sapxep" asp-for="SortType"
+                            onchange="this.form.submit()" asp-items="Model.SortTypes"></select>
+
+                    <label>Cỡ trang:</label>
+                    <select name="kichcotrang" asp-for="PageSize" onchange="this.form.submit()"
+                            asp-items="Model.PageSizes"></select>
+                </form>
+            </div>
+            <div class="input-group col-md-4 col-sm-4 col-xs-12 float-left text-center">
+                <input type="text" id="txtSearch" class="form-control" placeholder="Tìm kiếm...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btn-search" type="button">Tìm kiếm!</button>
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="border-cell heading percents2">
+        <input id='mastercheckbox' type='checkbox' />
+    </div>
+    <div class="border-cell heading percents2">
+        Cấp
+    </div>
+    <div class="border-cell heading percents16">
+        Domain
+    </div>
+    <div class="border-cell heading percents17">
+        Tài khoản
+    </div>
+    <div class="border-cell heading percents13">
+        Mật khẩu
+    </div>
+    <div class="border-cell heading-no-align-middle percents4">
+        Bật/Tắt Hiển thị mật khẩu
+    </div>
+    <div class="border-cell heading percents10">
+        Số điện thoại
+    </div>
+    <div class="border-cell heading percents15">
+        Email bảo mật
+    </div>
+    <div class="border-cell heading percents12">
+        Url/Số
+    </div>
+    <div class="border-cell heading percents5">
+       Thứ tự
+    </div>
+    <div class="border-cell heading percents2">
+        Sửa
+    </div>
+    <div class="border-cell heading percents2">
+        Xóa
+    </div>
+</div>
+
+    @*<div id="tbl-content"></div>*@
+    @foreach (var item in Model.Data.Results)
+    {    
+<div class="row">
+    <div class="border-cell cell-ok percents2">
+        <input type="checkbox" value="@item.Id" class="checkboxGroups" />
+    </div>
+    <div class="border-cell cell-ok percents2">
+        @item.Level
+    </div>
+    <div class="border-cell cell-ok percents16">
+        @item.Domain
+    </div>
+    <div class="border-cell cell-ok percents17">
+        @item.UserName
+    </div>
+    <div class="border-cell cell-ok percents13">
+        <span>@item.HiddenPassword</span>
+    </div>
+    <div class="border-cell cell-ok percents4">
+        <input type="checkbox" class="display-or-hidden-password" />
+        <input class="hiddenPassword" type="hidden" value="@item.HiddenPassword" />
+        <input class="password" type="hidden" value="@item.Password" />
+    </div>
+    <div class="border-cell cell-ok percents10">
+        @item.Phone
+    </div>
+    <div class="border-cell cell-ok percents15">
+        @item.SecurityEmail
+    </div>
+    <div class="border-cell cell-ok percents12">
+        @item.Url
+    </div>
+    <div class="border-cell cell-ok percents5">
+        @item.Order
+    </div>
+    <div class="border-cell cell-ok percents2">
+        <a href="/admin/account/update?id=@item.Id"><i class="fa fa-edit"></i></a>
+    </div>
+    <div class="border-cell cell-ok percents2">
+        <a class="btn btn-xs btn-delete" data-id="@item.Id"><i class="fa fa-trash"></i></a>
+    </div>
+    <input type="hidden" value="@item.PasswordId" />
+    <input type="hidden" value="@item.Note" />
+</div>            
+    }
+
+<div class="row">
+    @(await Component.InvokeAsync("Pager", Model.Data))
+</div>
+
+<partial name="_ImportExcelModal.cshtml" />

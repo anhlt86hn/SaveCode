@@ -1,0 +1,141 @@
+﻿<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Bài viết</h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" id="frmAddOrUpdate">
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label no-padding-right">Danh mục bài viết*</label>
+                                <label style="padding-top: 8px; margin-bottom: 0;"><span id="lblPostCategoryName"></span></label>
+                                <input type="hidden" id="txtPostCategoryId" />
+                            </div>
+
+                            <input type="hidden" id="hidId" />
+                            <input type="hidden" id="oldTags" />
+                            <div class="col-sm-9">
+                                <label for="txtName" class="control-label no-padding-right">Tên bài viết*</label>
+                                <input type="text" name="txtName" class="form-control" id="txtName" placeholder="Tên bài viết">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtMetaTitle" class="control-label no-padding-right">Tiêu đề (Meta Title SEO)*</label>
+                                <input type="text" name="txtMetaTitle" class="form-control" id="txtMetaTitle" placeholder="Meta Title (SEO)">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtMetaDescription" class="control-label no-padding-right">Mô tả (Meta Description SEO)*</label>
+                                <textarea rows="3" name="txtMetaDescription" class="form-control" id="txtMetaDescription" placeholder="Meta Description (SEO)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-6">
+                                <label for="txtImage" class="control-label no-padding-right">Ảnh*</label>
+                                <div class="input-group">
+                                    <input type="text" name="txtImage" class="form-control" id="txtImage" />
+                                    <input type="file" id="fileInputImage" style="display:none" />
+                                    <span class="input-group-btn">
+                                        <input type="button" id="btnSelectImg" class="btn btn-default" value="Browser" />
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger btn-cancel">Hủy</button>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="col-sm-3">
+                                    <label for="ckStatus" class="control-label no-padding-right">Hoạt động</label>
+                                    <input type="checkbox" checked="checked" id="ckStatus" name="ckStatus" />
+                                    <input type="hidden" id="hidSortOrder" name="hidSortOrder" />
+                                </div>
+                                <div class="col-sm-9">
+                                    <label for="txtSortOrder" class="control-label no-padding-right">Thứ tự*</label>
+                                    <input type="number" class="form-control" id="txtSortOrder" name="txtSortOrder">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label for="txtCode" class="control-label no-padding-right">Mã Code</label>
+                                <input type="text" name="txtCode" class="form-control" id="txtCode">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <div class="col-sm-3">
+                                    <label for="ckShowHot" class="control-label no-padding-right">HOT</label>
+                                    <input type="hidden" id="hidHotOrder" />
+                                    <input type="checkbox" name="ckShowHot" id="ckShowHot" />
+                                </div>
+                                <div class="col-sm-9">
+                                    <label for="txtHotOrder" class="control-label no-padding-right">Thứ tự HOT</label>
+                                    <input type="number" class="form-control" id="txtHotOrder" name="txtHotOrder">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="col-sm-4">
+                                    <label for="ckShowHome" class="control-label no-padding-right">Trang chủ</label>
+                                    <input type="hidden" id="hidHomeOrder" />
+                                    <input type="checkbox" name="ckShowHome" id="ckShowHome" />
+                                </div>
+                                <div class="col-sm-8">
+                                    <label for="txtHomeOrder" class="control-label no-padding-right">Thứ tự trang chủ</label>
+                                    <input type="number" class="form-control" id="txtHomeOrder" name="txtHomeOrder">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-5">
+                                <label for="txtUrl" class="control-label no-padding-right">Url</label>
+                                <input type="text" name="txtUrl" class="form-control" id="txtUrl">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtContent" class="control-label no-padding-right">Nội dung</label>
+                                <textarea name="txtContent" id="txtContent" rows="10" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtTag" class="control-label no-padding-right">Tags (ngăn cách bởi dấu phẩy ,)</label>
+                                <input type="text" name="txtTag" class="form-control" id="txtTag">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtDescription" class="control-label no-padding-right">Mô tả ngắn</label>
+                                <textarea rows="5" name="txtDescription" class="form-control" id="txtDescription"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="txtMetaKeywords" class="control-label no-padding-right">Từ khóa (Meta Keywords SEO)</label>
+                                <input type="text" name="txtMetaKeywords" class="form-control" id="txtMetaKeywords" placeholder="Meta Keywords (SEO)">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

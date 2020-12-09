@@ -1,0 +1,18 @@
+﻿@using RicoCore.Services.Content.Contacts.Dtos;
+@model ContactDetailViewModel
+
+@if (Model != null)
+{
+    <div class="row">
+        @*<div style="text-align:center">
+            <a href="/">
+                <img src="~/images/Logo.png" alt="Logo Rèm cửa Đức Trung">
+            </a>
+        </div>*@
+        <address>
+            <p> <i class="fa fa-map-marker"></i>@Model.Name, @Model.Address</p>
+            <p><i class="fa fa-mobile"></i><span>@Model.Phone</span> </p>
+            <p> <i class="fa fa-envelope"></i><span><a href="mailto:@Model.Email">@Model.Email</a></span></p>
+        </address>
+    </div>
+}

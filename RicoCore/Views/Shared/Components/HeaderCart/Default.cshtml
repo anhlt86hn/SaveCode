@@ -1,0 +1,64 @@
+﻿@model List<RicoCore.Models.ShoppingCartViewModel>
+    <div class="mini-cart" id="headerCart">
+        <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="/gio-hang"> 
+            @if(Model.Count >0){
+            <span class="cart_count">@Model.Count</span>
+            }
+            <span class="price">Giỏ hàng của tôi / 
+            @Model.Sum(x => x.Quantity * x.Price).ToString("N0")
+                
+                </span> </a> </div>
+        <div>
+            <div class="jtv-top-cart-content">
+                @if(Model.Count > 0){
+
+                <!--block-subtitle-->
+                <ul class="mini-products-list" id="cart-sidebar">
+                    @foreach (var item in Model)
+                    {
+                        <li class="item">
+                            <div class="item-inner">
+                                <a class="product-image" title="" ref=" javascript:;"><img alt="@item.ProductItem.Name" src="@item.ProductItem.Image1"> </a>
+                                @*<a class="product-image" title="" ref=" #"><img alt="@item.ProductItem.Name" src="/client-side/images/products/img01.jpg"> </a>*@
+                                <div class="product-details">
+                                    <div class="access">
+                                        <a class="jtv-btn-remove remove-cart" data-id="@item.ProductItem.Id" title="Xóa sản phẩm khỏi giỏ hàng" href="javascript:;">Xóa</a> 
+                                    @*<a class="btn-edit" title="Sửa sản phẩm trong giỏ hàng" href="javascript:;"><i class="icon-pencil"></i><span class="hidden">Sửa</span></a>*@ 
+                                    </div>
+                                    <p class="product-name"><a href="javascript:;">@item.ProductItem.Name</a> </p>
+                                    <strong>@item.Quantity</strong> x
+                                    <span class="price">
+                                        @if(item.ProductItem.Price < item.ProductItem.OriginalPrice)
+                                        {
+                                            <p class="special-price"> <span class="price-label">Giá mới</span> <span class="price">@item.ProductItem.Price.ToString("N0")</span> </p>
+                                            <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price">@item.ProductItem.OriginalPrice.ToString("N0")</span> </p>
+                                        }
+                                        else
+                                        {
+                                            <span class="regular-price"> <span class="price">@item.ProductItem.Price.ToString("N0")</span> </span>
+                                        }
+                                    </span>
+                                    @*<strong>@item.Quantity</strong> x <span class="price">@((item.Product.PromotionPrice ?? item.Product.Price).ToString("N0"))</span>*@
+                                    <div class="item-code">Mã: <strong>@item.ProductItem.Code</strong></div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+                </ul>
+
+                <!--actions-->
+                <div class="actions">
+                   <button class="btn-checkout clear-all" title="Xóa giỏ hàng" type="button"><span>Xóa giỏ hàng</span> </button>
+                    @*<a id="btnClearAll" href="javascript:;" title="Xóa giỏ hàng"><i class="fa fa-remove"> </i>&nbsp; Xóa giỏ hàng</a>*@                    
+                    @*<button class="btn-checkout" title="Checkout" type="button" onClick="location.href='/thanh-toan'"><span>Thanh toán</span> </button>*@
+                    <a href="/gio-hang" class="view-cart"><span>Xem giỏ hàng</span></a>
+                </div>
+                }
+                else{
+                <p>Bạn chưa thêm sản phẩm nào vào giỏ hàng</p>
+                }
+            </div>
+        </div>
+    </div>

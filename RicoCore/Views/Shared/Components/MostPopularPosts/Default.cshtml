@@ -1,0 +1,41 @@
+﻿@using RicoCore.Services.Content.Posts.Dtos;
+@model List<PostViewModel>
+
+<div class="popular-posts widget widget__sidebar" id="recent-posts-4">
+    <h3 class="widget-title"><span>Các bài viết xem nhiều nhất</span></h3>
+    <div class="widget-content">
+        <ul class="posts-list unstyled">
+            @if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <li>
+                        <figure class="featured-thumb"> 
+                            <a href="/bai-viet/@item.Url">
+                                @if (!string.IsNullOrEmpty(item.Image) || !string.IsNullOrWhiteSpace(item.Image))
+                                {
+                                    <img width="80" height="53" alt="@item.Name" src="@item.Image">
+                                }
+                                else
+                                {
+                                    <img width="80" height="53" alt="@item.Name" src="~/client-side/images/blog-img1.jpg" />
+                                }
+
+                            </a> 
+                        </figure>
+                        <!--featured-thumb-->
+                        <h4><a title="@item.Name" href="/bai-viet/@item.Url">@item.Name</a></h4>
+                        <p class="post-meta">
+                            <i class="icon-calendar"></i>
+                            <span>@item.DateCreated.Day-@item.DateCreated.Month-@item.DateCreated.Year</span>                            .
+                        </p>
+                    </li>
+                }
+
+            }
+
+
+        </ul>
+    </div>
+    <!--widget-content-->
+</div>

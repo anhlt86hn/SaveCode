@@ -1,0 +1,22 @@
+﻿body {
+}
+
+#_easyui_textbox_input2, .textbox.combo {
+    width: 100% !important;
+}
+
+.align_center {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.modal-content {
+    /*max-height: calc(100vh - 200px);*/
+    max-height: 900px;
+    overflow-y: auto;
+}
+
+.no-padding-left {
+    text-align: left !important;
+    
+}

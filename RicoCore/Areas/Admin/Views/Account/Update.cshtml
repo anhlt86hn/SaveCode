@@ -1,0 +1,144 @@
+﻿@using RicoCore.Services.Systems.Accounts.Dtos;
+@model AccountViewModel
+@section Scripts{
+    <script src="~/app/controllers/account/update.js" asp-append-version="true"></script>
+    <script>
+        var account = new accountController();
+        account.initialize();
+    </script>
+}
+@section Styles{
+    <style>
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
+    </style>
+}
+    <form action="/admin/account/update" method="post" class="form-horizontal" role="form" id="frmUpdate" enctype="multipart/form-data">
+        <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);"><i class="fa fa-backward"></i>&nbsp;Trở lại</a>
+        <button type="submit" id="btnSave" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;Lưu</button>
+        <button type="button" id="btnReset" data-dismiss="modal" class="btn btn-danger btn-cancel">Reset</button>
+        <input type="hidden" asp-for="Id" />
+        <h1>Sửa tài khoản</h1>
+        <div asp-validation-summary="ModelOnly">
+            <span>Sửa những lỗi sau:</span>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Level" class="control-label no-padding-right text-left">Cấp*</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Level" class="form-control text-left" value="1" />
+                    </div>
+                </div>
+                <span asp-validation-for="Level"></span>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Domain" class="control-label no-padding-right text-left">Domain*</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Domain" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="Domain"></span>
+            </div>
+
+            <div class="col-sm-4 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="UserName" class="control-label no-padding-right text-left">Tài khoản*</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="UserName" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="UserName"></span>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="PasswordId" class="control-label no-padding-right text-left">Mật khẩu*</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <select asp-for="PasswordId" asp-items="Model.Passwords" class="form-control text-left"></select>
+                    </div>
+                </div>
+                <span asp-validation-for="PasswordId"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Order" class="control-label no-padding-right text-left">Thứ tự*</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Order" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="Order"></span>
+            </div>
+
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Phone" class="control-label no-padding-right text-left">Phone</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Phone" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="Phone"></span>
+            </div>
+
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="SecurityEmail" class="control-label no-padding-right text-left">SecurityEmail</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="SecurityEmail" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="SecurityEmail"></span>
+            </div>
+
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Url" class="control-label no-padding-right text-left">Url</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Url" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="Url"></span>
+            </div>
+
+            <div class="col-sm-2 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="Note" class="control-label no-padding-right text-left">Ghi chú</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input asp-for="Note" class="form-control text-left" />
+                    </div>
+                </div>
+                <span asp-validation-for="Note"></span>
+            </div>
+
+        </div>
+
+
+    </form>

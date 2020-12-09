@@ -1,0 +1,110 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["MetaTitle"] = "Đăng ký | Rèm Đức Trung";
+    ViewData["MetaDescription"] = "Đăng ký | Rèm Đức Trung";
+    ViewData["MetaKeywords"] = "Đăng ký";
+}
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Trang chủ" href="/">Trang chủ</a><span>&raquo;</span></li>
+                    <li><strong>Đăng ký</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="page-content">
+            <div class="account-login">
+                <div class="col-md-3 col-sm-2"></div>
+                <div class="col-md-6 col-sm-8">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-action="Register" asp-controller="Account" method="post">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="check-title">
+                                    <h1>Đăng ký thành viên</h1>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <label asp-for="Email"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="Email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label asp-for="Password"></label>
+                                <div class="input-text">
+                                    <input type="password" asp-for="Password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label asp-for="ConfirmPassword"></label>
+                                <div class="input-text">
+                                    <input type="password" asp-for="ConfirmPassword" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="FullName"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="FullName" class="form-control">
+                                </div>
+                            </div>
+                            @*<div class="col-sm-6">
+                                <label asp-for="BirthDay"></label>
+                                <div class="input-text">
+                                    <input type="date" asp-for="BirthDay" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="Avatar"></label>
+                                <div class="input-text">
+                                    <input type="file" asp-for="Avatar" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label asp-for="PhoneNumber"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="PhoneNumber" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label asp-for="Address"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="Address" class="form-control">
+                                </div>
+                            </div>*@
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <recaptcha />
+                                    <span class="text-danger" id="recaptchaErrorMessage"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="submit-text">
+                                    <button type="submit" class="button"><i class="fa fa-user"></i>&nbsp; <span>Đăng ký</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main Container End -->
+
+@section Scripts {
+    <recaptcha-script validation-message-element-id="recaptchaErrorMessage" />
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

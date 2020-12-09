@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RicoCore.Models
+@using RicoCore.Extensions
+@using RicoCore.Data.Entities.System;
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    <img src="@User.GetSpecificClaim("Avatar")" alt="">@User.GetSpecificClaim("FullName")
+    <span class=" fa fa-angle-down"></span>
+</a>
+<ul class="dropdown-menu dropdown-usermenu pull-right">
+    <li><a asp-area="Admin" asp-page="/Account/Manage/PersonalData"> Hồ sơ</a></li>
+    <li><a asp-area="Admin" asp-page="/Account/Manage/TwoFactorAuthentication">2FA</a></li>
+    <li><a asp-area="Admin" asp-page="/Account/Manage/ChangePassword">Đổi mật khẩu</a></li>
+    <li><a asp-area="Admin" asp-page="/Account/Manage/Index">Đổi số điện thoại</a></li>
+    @*<li><a href="#modal-change-password" data-target="#modal-change-password" data-toggle="modal">Đổi mật khẩu</a></li>*@
+    <li>
+        <a asp-area="Admin" asp-page="/System/Setting">
+            <span class="badge bg-red pull-right">50%</span>
+            <span>Cài đặt</span>
+        </a>
+    </li>
+    <li><a asp-area="Admin" asp-page="/System/Help">Trợ giúp</a></li>
+    <li>
+        <form action="/Admin/Account/Logout" method="post" id="logoutForm" class="navbar-right">
+            <button type="submit" class="btn btn-link navbar-btn navbar-link">Đăng xuất</button>
+        </form>
+    </li>
+</ul>

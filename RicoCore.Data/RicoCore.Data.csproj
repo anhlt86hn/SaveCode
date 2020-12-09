@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Entities\Content\Information.cs" />
+    <Compile Remove="Entities\Content\InformationDescription.cs" />
+    <Compile Remove="Entities\Content\InformationToLayout.cs" />
+    <Compile Remove="Entities\Content\InformationToStore.cs" />
+    <Compile Remove="Entities\_Archive\Address.cs" />
+    <Compile Remove="Entities\_Archive\Attribute.cs" />
+    <Compile Remove="Entities\_Archive\AttributeDescription.cs" />
+    <Compile Remove="Entities\_Archive\AttributeGroup.cs" />
+    <Compile Remove="Entities\_Archive\AttributeGroupDescription.cs" />
+    <Compile Remove="Entities\_Archive\Coupon.cs" />
+    <Compile Remove="Entities\_Archive\CouponCategory.cs" />
+    <Compile Remove="Entities\_Archive\CouponDescription.cs" />
+    <Compile Remove="Entities\_Archive\CouponHistory.cs" />
+    <Compile Remove="Entities\_Archive\CouponProduct.cs" />
+    <Compile Remove="Entities\_Archive\Currency.cs" />
+    <Compile Remove="Entities\_Archive\Customer.cs" />
+    <Compile Remove="Entities\_Archive\CustomerActivity.cs" />
+    <Compile Remove="Entities\_Archive\CustomerLogin.cs" />
+    <Compile Remove="Entities\_Archive\CustomerOnline.cs" />
+    <Compile Remove="Entities\_Archive\CustomerReward.cs" />
+    <Compile Remove="Entities\_Archive\CustomerSearch.cs" />
+    <Compile Remove="Entities\_Archive\CustomerTransaction.cs" />
+    <Compile Remove="Entities\_Archive\CustomerWishlist.cs" />
+    <Compile Remove="Entities\_Archive\CustomField.cs" />
+    <Compile Remove="Entities\_Archive\CustomFieldCustomerGroup.cs" />
+    <Compile Remove="Entities\_Archive\CustomFieldDescription.cs" />
+    <Compile Remove="Entities\_Archive\CustomFieldValue.cs" />
+    <Compile Remove="Entities\_Archive\CustomFieldValueDescription.cs" />
+    <Compile Remove="Entities\_Archive\Filter.cs" />
+    <Compile Remove="Entities\_Archive\FilterDescription.cs" />
+    <Compile Remove="Entities\_Archive\FilterGroup.cs" />
+    <Compile Remove="Entities\_Archive\FilterGroupDescription.cs" />
+    <Compile Remove="Entities\_Archive\LengthClass.cs" />
+    <Compile Remove="Entities\_Archive\LengthClassDescription.cs" />
+    <Compile Remove="Entities\_Archive\Option.cs" />
+    <Compile Remove="Entities\_Archive\OptionDescription.cs" />
+    <Compile Remove="Entities\_Archive\OptionValue.cs" />
+    <Compile Remove="Entities\_Archive\OptionValueDescription.cs" />
+    <Compile Remove="Entities\_Archive\Order.cs" />
+    <Compile Remove="Entities\_Archive\OrderHistory.cs" />
+    <Compile Remove="Entities\_Archive\OrderOption.cs" />
+    <Compile Remove="Entities\_Archive\OrderProduct.cs" />
+    <Compile Remove="Entities\_Archive\OrderRecurring.cs" />
+    <Compile Remove="Entities\_Archive\OrderRecurringTransaction.cs" />
+    <Compile Remove="Entities\_Archive\OrderShipment.cs" />
+    <Compile Remove="Entities\_Archive\OrderStatus.cs" />
+    <Compile Remove="Entities\_Archive\OrderTotal.cs" />
+    <Compile Remove="Entities\_Archive\OrderVoucher.cs" />
+    <Compile Remove="Entities\_Archive\Product.cs" />
+    <Compile Remove="Entities\_Archive\ProductAttribute.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategory.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategoryDescription.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategoryFilter.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategoryPath.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategoryToLayout.cs" />
+    <Compile Remove="Entities\_Archive\ProductCategoryToStore.cs" />
+    <Compile Remove="Entities\_Archive\ProductDescription.cs" />
+    <Compile Remove="Entities\_Archive\ProductDiscount.cs" />
+    <Compile Remove="Entities\_Archive\ProductFilter.cs" />
+    <Compile Remove="Entities\_Archive\ProductImage.cs" />
+    <Compile Remove="Entities\_Archive\ProductOption.cs" />
+    <Compile Remove="Entities\_Archive\ProductOptionValue.cs" />
+    <Compile Remove="Entities\_Archive\ProductRecurring.cs" />
+    <Compile Remove="Entities\_Archive\ProductRelated.cs" />
+    <Compile Remove="Entities\_Archive\ProductReward.cs" />
+    <Compile Remove="Entities\_Archive\ProductSpecial.cs" />
+    <Compile Remove="Entities\_Archive\ProductTag.cs" />
+    <Compile Remove="Entities\_Archive\ProductToCategory.cs" />
+    <Compile Remove="Entities\_Archive\ProductToLayout.cs" />
+    <Compile Remove="Entities\_Archive\ProductToStore.cs" />
+    <Compile Remove="Entities\_Archive\ProductWishlist.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RicoCore.Infrastructure\RicoCore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\_Archive\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.10" />
+  </ItemGroup>
+
+</Project>

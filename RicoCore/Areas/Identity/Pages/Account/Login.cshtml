@@ -1,0 +1,183 @@
+﻿@page "/Login"
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Đăng nhập bước 1";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Đăng nhập hệ thống </title>
+
+    <!-- Bootstrap -->
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- NProgress -->
+
+    <link href="~/lib/nprogress/nprogress.css" rel="stylesheet" />
+    <!-- Animate.css -->
+
+    <link href="~/lib/animate.css/animate.css" rel="stylesheet" />
+    <link href="~/lib/notify/styles/metro/notify-metro.css" rel="stylesheet" />
+    <!-- Custo
+        m Theme Style -->
+    <link href="~/admin-side/css/custom.css" rel="stylesheet" />
+</head>
+
+<body class="login">
+    <div>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form id="frmLogin" method="post">
+                        @Html.AntiForgeryToken()
+                        <h1>Đăng nhập</h1>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div>
+                            <input asp-for="Input.UserName" class="form-control" />
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                            @*<input type="text" class="form-control" name="userName" placeholder="Tên đăng nhập" id="txtUserName" required="" />*@
+                        </div>
+                        <div>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            @*<input type="password" class="form-control" name="password" placeholder="Mật khẩu" id="txtPassword" required="" />*@
+                        </div>
+                        <div>
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                        <div>
+                            @*<a class="btn btn-default submit" href="#" id="btnLogin">Đăng nhập</a>*@
+                            @*<button id="btnLogin" type="submit" class="btn btn-default">Đăng nhập</button>*@
+                            @*<a class="reset_pass" href="Account/ForgotPassword">Quên mật khẩu?</a>*@
+                            @*<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>*@
+                            <button type="submit" class="btn btn-default">Đăng nhập</button>
+                            <a class="reset_pass" asp-page="./ForgotPassword">Quên mật khẩu?</a>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-paw"></i> CMS </h1>
+                                <p>©@DateTime.Now.Year - <a href="https://www.facebook.com/luongtuananh.86" target="_blank" style="color:blue;">Lương Tuấn Anh</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/notify/notify.js"></script>
+    <script src="~/lib/notify/styles/metro/notify-metro.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation/localization/messages_vi.js"></script>
+    <script src="~/app/shared/aspnetcore.js"></script>
+    @*<script src="~/app/controllers/login/index.js"></script>
+    <script>
+        var login = new loginController();
+        login.initialize();
+    </script>*@
+</body>
+</html>
+
+
+
+@*<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form method="post">
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Log in</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to log in.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@

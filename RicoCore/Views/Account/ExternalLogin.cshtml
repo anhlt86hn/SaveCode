@@ -1,0 +1,87 @@
+﻿@model ExternalLoginViewModel
+@{
+    ViewData["MetaTitle"] = "Đăng nhập bằng Google/Facebook/Instagram...vv";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Trang chủ" href="/">Trang chủ</a><span>&raquo;</span></li>
+                    <li><strong>Xác nhận đăng nhập</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="page-content">
+            <div class="account-login">
+                <div class="col-md-3 col-sm-2"></div>
+                <div class="col-md-6 col-sm-8">
+                    <p class="text-info">
+                        Bạn đã đăng nhập thành công bằng <strong>@ViewData["LoginProvider"]</strong>.
+                        Xin vui lòng điền thêm thông tin ở dưới và bấm vào nút Đăng ký để hoàn thành việc đăng nhập.                      
+                    </p>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-action="ExternalLoginConfirmation" asp-controller="Account" method="post">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="check-title">
+                                    <h4>Đăng ký thành viên</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <label asp-for="FullName"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="FullName" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <label asp-for="DOB"></label>
+                                <div class="input-text">
+                                    <input type="date" asp-for="DOB" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <label asp-for="PhoneNumber"></label>
+                                <div class="input-text">
+                                    <input type="text" asp-for="PhoneNumber" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <recaptcha />
+                                    <span class="text-danger" id="recaptchaErrorMessage"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="submit-text">
+                                    <button type="submit" class="button"><i class="fa fa-user"></i>&nbsp; <span>Đăng ký</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main Container End -->
+
+@section Scripts {
+    <recaptcha-script validation-message-element-id="recaptchaErrorMessage" />
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using AspNetCore.Authorization
+@using RicoCore.Services.Content.Posts.Dtos
+@model PostViewModel
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Bài viết";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+    <link href="~/client-side/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/client-side/css/ResponsiveStyle.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);">Trở lại</a>
+        <a href="/admin/post/update?id=@Model.Id" class="btn btn-info">Sửa bài viết &nbsp;<i class="fa fa-edit"></i></a>
+    </div>
+</div>
+<div class="page-title">
+    <div class="title_left" style="width:100% !important;">
+        <a class="a-title" href="/admin/post/detail?url=@Model.Url"><h3>@Model.Name</h3></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 Content">
+        @Html.Raw(Model.Content)
+    </div>
+</div>

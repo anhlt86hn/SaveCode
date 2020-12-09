@@ -1,0 +1,87 @@
+﻿@using RicoCore.Services.Systems.Functions.Dtos
+@model FunctionViewModel
+@section Scripts{
+    <script src="~/app/controllers/function/update.js" asp-append-version="true"></script>
+    <script>
+        var js = new jsController();
+        js.initialize();
+    </script>
+}
+@section Styles{
+    <style>
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
+    </style>
+}
+<form action="/admin/function/update" method="post" class="form-horizontal" role="form" id="frmAddOrUpdate">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+            <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);"><i class="fa fa-backward"></i>&nbsp;Trở lại</a>
+            <button type="submit" id="btnSave" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;Lưu</button>
+            <button type="button" id="btnReset" data-dismiss="modal" class="btn btn-danger btn-cancel">Reset</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+            <h1>Sửa chức năng</h1>
+            <div asp-validation-summary="ModelOnly">
+                <span>Sửa những lỗi sau:</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label for="ParentId" class="control-label text-left">Chức năng cha*</label>
+                <select asp-for="ParentId" asp-items="Model.Categories" class="form-control text-left"></select>
+                <span asp-validation-for="ParentId"></span>
+                <input type="hidden" id="ParentFunctionId" />
+                <input asp-for="Id" class="form-control text-left" type="hidden" />
+            </div>
+
+            <div class="form-group">
+                <label for="ParentId" class="control-label text-left">Tên chức năng*</label>
+                <input asp-for="Name" class="form-control text-left" />
+                <span asp-validation-for="Name"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="UniqueCode" class="control-label text-left">Mã chức năng*</label>
+                <input asp-for="UniqueCode" class="form-control text-left" />
+                <span asp-validation-for="UniqueCode"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Url" class="control-label text-left">Url*</label>
+                <input asp-for="Url" class="form-control text-left" />
+                <span asp-validation-for="Url"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="CssClass" class="control-label text-left">Css Icon*</label>
+                <input asp-for="CssClass" class="form-control text-left" />
+                <span asp-validation-for="CssClass"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="IsActive" class="control-label text-left">Hoạt động  <input asp-for="IsActive" class="form-control text-left" /></label>
+                <span asp-validation-for="IsActive"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="SortOrder" class="control-label text-left">Thứ tự* </label>
+                <input asp-for="SortOrder" class="form-control text-left" />
+                <span asp-validation-for="SortOrder"></span>
+                <input type="hidden" id="hidSortOrder" name="hidSortOrder" />
+            </div>
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,130 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "provider": "cdnjs",
+      "library": "gentelella@1.4.0",
+      "destination": "wwwroot/lib/gentelella/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "nprogress@0.2.0",
+      "destination": "wwwroot/lib/nprogress/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-daterangepicker@2.1.25",
+      "destination": "wwwroot/lib/bootstrap-daterangepicker/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "fastclick@1.0.6",
+      "destination": "wwwroot/lib/fastclick/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "Chart.js@2.7.1",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "flot@0.8.3",
+      "destination": "wwwroot/lib/flot/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "datejs@1.0",
+      "destination": "wwwroot/lib/datejs/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "moment.js@2.18.1",
+      "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "animate.css@3.5.2",
+      "destination": "wwwroot/lib/animate.css/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "notify@0.4.2",
+      "destination": "wwwroot/lib/notify/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootbox.js@4.4.0",
+      "destination": "wwwroot/lib/bootbox.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "gauge.js@1.3.6",
+      "destination": "wwwroot/lib/gauge.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-progressbar@0.9.0",
+      "destination": "wwwroot/lib/bootstrap-progressbar/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "iCheck@1.0.2",
+      "destination": "wwwroot/lib/iCheck/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jqvmap@1.5.1",
+      "destination": "wwwroot/lib/jqvmap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "mustache.js@2.3.0",
+      "destination": "wwwroot/lib/mustache.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "twbs-pagination@1.4.1",
+      "destination": "wwwroot/lib/twbs-pagination/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-treegrid@0.2.0",
+      "destination": "wwwroot/lib/jquery-treegrid/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-datepicker@1.7.1",
+      "destination": "wwwroot/lib/bootstrap-datepicker/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@3.3.7",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@2.2.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validate@1.14.0",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validation-unobtrusive@3.2.6",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+    },
+    {
+      "library": "ckeditor@4.7.3",
+      "destination": "wwwroot/lib/ckeditor/"
+    }
+  ]
+}

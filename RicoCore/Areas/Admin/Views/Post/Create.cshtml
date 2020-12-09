@@ -1,0 +1,224 @@
+﻿@using RicoCore.Services.Content.Posts.Dtos;
+@model PostViewModel
+@section Scripts{
+    <script src="~/app/controllers/post/create.js" asp-append-version="true"></script>
+    <script>
+        var createpPost = new createPostController();
+        createpPost.initialize();
+    </script>
+}
+@section Styles{
+    <style>
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
+    </style>
+}
+    <form action="/admin/post/create" method="post" class="form-horizontal" role="form" id="frmAdd" enctype="multipart/form-data">
+        <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);"><i class="fa fa-backward"></i>&nbsp;Trở lại</a>       
+        <button type="submit" id="btnSave" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;Lưu</button>
+        <button type="button" id="btnReset" data-dismiss="modal" class="btn btn-danger btn-cancel">Reset</button>
+
+        <input type="hidden" id="oldTags" />
+        <h1>Thêm mới bài viết</h1>
+        <div asp-validation-summary="ModelOnly">
+            <span>Sửa những lỗi sau:</span>
+        </div>
+
+
+
+        <div class="form-group">
+
+            <div class="col-sm-3">
+                <div class="col-sm-4">
+                    <label class="control-label no-padding-right text-left">Danh mục bài viết*</label>
+                </div>
+                <div class="col-sm-8">
+                    <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control text-left"></select>
+                    <span asp-validation-for="CategoryId"></span>
+                    @*<label style="padding-top: 8px; margin-bottom: 0;"><span id="lblPostCategoryName"></span></label>*@
+                    <input type="hidden" id="PostCategoryId" />
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <div class="col-sm-5">
+                    <label for="OrderStatus" class="control-label no-padding-right text-left">Hoạt động</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="OrderStatus" class="form-control text-left" />                    
+                    <span asp-validation-for="OrderStatus"></span>
+                    @*<input type="checkbox" checked="checked" id="ckStatus" name="ckStatus" />*@
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="col-sm-4">
+                    <label for="SortOrder" class="control-label no-padding-right text-left">Thứ tự*</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="SortOrder" class="form-control text-left" />
+                    <span asp-validation-for="SortOrder"></span>
+                    <input type="hidden" id="hidSortOrder" name="hidSortOrder" />
+                    @*<input type="number" class="form-control" id="txtSortOrder" name="txtSortOrder">*@
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <div class="col-sm-5">
+                    <label for="HotOrderStatus" class="control-label no-padding-right text-left">HOT</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="HotOrderStatus" class="form-control text-left" />
+                    <span asp-validation-for="HotOrderStatus"></span>
+                    @*<input type="checkbox" checked="checked" id="ckStatus" name="ckStatus" />*@
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="col-sm-5">
+                    <label for="HotOrder" class="control-label no-padding-right text-left">Thứ tự HOT</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="HotOrder" class="form-control text-left" />
+                    <span asp-validation-for="HotOrder"></span>
+                    <input type="hidden" id="hidHotOrder" name="hidHotOrder" />
+                    @*<input type="number" class="form-control" id="txtSortOrder" name="txtSortOrder">*@
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <div class="col-sm-5">
+                    <label for="HomeOrderStatus" class="control-label no-padding-right text-left">Trang chủ</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="HomeOrderStatus" class="form-control text-left" />
+                    <span asp-validation-for="HomeOrderStatus"></span>
+                    @*<input type="checkbox" checked="checked" id="ckStatus" name="ckStatus" />*@
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="col-sm-6">
+                    <label for="HomeOrder" class="control-label no-padding-right text-left">Thứ tự trang chủ</label>
+                </div>
+                <div class="col-sm-5">
+                    <input asp-for="HomeOrder" class="form-control text-left" />
+                    <span asp-validation-for="HomeOrder"></span>
+                    <input type="hidden" id="hidHomeOrder" name="hidHomeOrder" />
+                    @*<input type="number" class="form-control" id="txtSortOrder" name="txtSortOrder">*@
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                <div class="col-sm-2">
+                    <label for="Name" class="control-label no-padding-right text-left">Tên bài viết*</label>
+                </div>
+                <div class="col-sm-10">
+                    <input asp-for="Name" class="form-control text-left">
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="col-sm-3">
+                    <label for="MetaTitle" class="control-label no-padding-right text-left">Tiêu đề (Meta Title SEO)*</label>
+                </div>
+                <div class="col-sm-9">
+                    <input asp-for="MetaTitle" class="form-control text-left">
+                    <span asp-validation-for="MetaTitle"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="MetaDescription" class="control-label no-padding-right text-left">Mô tả (Meta Description SEO)*</label>
+                <textarea asp-for="MetaDescription" class="form-control text-left"></textarea>
+                <span asp-validation-for="MetaDescription"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @*<div class="col-sm-6">
+            <form method="post" asp-controller="Admin/Upload" asp-action="ImageUpload" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="Image" class="control-label no-padding-right">Ảnh*</label>
+                    <input asp-for="Image" type="file" class="form-control custom-file-input" name="file" />
+                    <label class="custom-file-input">Chọn ảnh...</label>
+                    </div>
+                <button type="submit">Upload</button>
+                <img src="@ViewData["FileLocation"]" width="300" height="200" />
+            </form>
+        </div>*@
+
+
+            <div class="col-sm-6">
+                <label for="Image" class="control-label no-padding-right text-left">Ảnh</label>
+                <div class="input-group">
+                    <input type="text" asp-for="Image" class="form-control" />
+                    <input type="file" id="fileInputImage" style="display:none" />
+                    <span class="input-group-btn">
+                        <input type="button" id="btnSelectImg" class="btn btn-default" value="Browser" />
+                    </span>
+                    <span asp-validation-for="Image"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <label for="Code" class="control-label no-padding-right text-left">Mã Code</label>
+                <input asp-for="Code" class="form-control text-left" disabled="disabled" />
+                <span asp-validation-for="Code"></span>
+                @*<input type="text" name="txtCode" class="form-control" id="txtCode">*@
+            </div>
+
+            <div class="col-sm-5">
+                <label for="Url" class="control-label no-padding-right text-left">Url</label>
+                <input asp-for="Url" class="form-control text-left" />
+                <span asp-validation-for="Url"></span>
+                @*<input type="text" name="txtUrl" class="form-control" id="txtUrl">*@
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="Tag" class="control-label no-padding-right text-left">Tags (ngăn cách bởi dấu phẩy ,)</label>
+                <input asp-for="Tags" class="form-control text-left" />
+                @*<input type="text" name="txtTag" class="form-control" id="txtTag">*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="Content" class="control-label no-padding-right text-left">Nội dung</label>
+                <textarea asp-for="Content" class="form-control text-left"></textarea>"
+                @*<textarea name="txtContent" id="txtContent" rows="10" class="form-control"></textarea>*@
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="Description" class="control-label no-padding-right text-left">Mô tả ngắn</label>
+                <textarea asp-for="Description" class="form-control text-left"></textarea>"
+                @*<textarea rows="5" name="txtDescription" class="form-control" id="txtDescription"></textarea>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label for="MetaKeywords" class="control-label no-padding-right text-left">Từ khóa (Meta Keywords SEO)</label>
+                <input asp-for="MetaKeywords" class="form-control text-left" />
+                @*<input type="text" name="txtMetaKeywords" class="form-control" id="txtMetaKeywords" placeholder="Meta Keywords (SEO)">*@
+            </div>
+        </div>
+
+    </form>

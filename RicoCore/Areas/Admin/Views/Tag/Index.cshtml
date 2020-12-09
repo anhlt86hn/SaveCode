@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using AspNetCore.Authorization
+@using RicoCore.Areas.Admin.Models
+@model PagedResultTagViewModel
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Danh sách Tags";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+    <link href="~/client-side/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/client-side/css/ResponsiveStyle.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/post/image-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/quantity-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/whole-price-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post-tag/detail.js" asp-append-version="true"></script>
+    <script>
+        var topic = new postDetailController();
+        topic.initialize();
+    </script>
+}
+<div class="row">
+    <div class="col-xs-12"><h2>Danh sách các Tags</h2></div>
+</div>
+<div class="row">
+    <div class="col-md-auto col-sm-auto col-xs-12">
+        @{
+                var result = await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Create);
+        }
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12 text-xl-center text-md-center text-sm-center">  
+                <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);">Trở lại</a>
+                @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+                    {
+                <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                    <i class="fa fa-trash-o"></i> Xóa nhiều
+                </button>
+                    }
+            </div>
+
+            <form method="get">
+                <div class="col-md-3 col-sm-3 col-xs-12 float-left">
+
+                    <label>Sắp xếp:</label>
+                    @*<select name="sapxep" asp-for="SortType"
+                        onchange="this.form.submit()"  asp-items="Model.SortTypes">*@
+                    <select name="sapxep" asp-for="SortType" asp-items="Model.SortTypes"></select>
+                    <label>Cỡ trang:</label>
+                    <select name="kichcotrang" asp-for="PageSize" asp-items="Model.PageSizes"></select>
+                </div>
+                <div class="input-group col-md-4 col-sm-4 col-xs-12 float-left text-center">
+                    <input type="text" id="txtSearch" name="keyword" class="form-control" placeholder="Tìm kiếm...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" id="btn-search" type="button" onclick="this.form.submit()">Tìm kiếm!</button>
+                    </span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <input id='mastercheckbox' type='checkbox' /> Chọn tất cả
+    </div>
+</div>
+
+<div class="row">
+    @*<div id="tbl-content"></div>*@
+    @foreach (var item in Model.Data.Results)
+        {
+    <div class="col-md-3 col-sm-3 col-xs-12 cell-unit">
+        <input type="checkbox" value="@item.Id" class="checkboxGroups" />
+        <a class="a-title" href="/admin/post/viewby?tag=@item.Name">@item.Name</a>
+    </div>
+        }
+</div>
+
+<div class="row">
+    @(await Component.InvokeAsync("Pager", Model.Data))
+</div>

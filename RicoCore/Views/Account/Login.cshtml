@@ -1,0 +1,111 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using RicoCore.Data.Entities.System
+@model LoginCustomerViewModel
+@inject SignInManager<AppUser> SignInManager
+
+@{
+    ViewData["MetaTitle"] = "Đăng nhập | Rèm Đức Trung";
+    ViewData["MetaDescription"] = "Đăng nhập | Rèm Đức Trung";
+    ViewData["MetaKeywords"] = "Đăng nhập";
+}
+<!-- Breadcrumbs -->
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li class="home"> <a title="Trang chủ" href="/">Trang chủ</a><span>&raquo;</span></li>
+                    <li><strong>Tài khoản</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<section class="main-container col1-layout">
+        <div class="main container">
+            <div class="page-content">
+                <div class="account-login">
+                    <div class="box-authentication">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                            <h1>Đăng nhập</h1>
+                            <p class="before-login-text">Đăng nhập tài khoản bằng email</p>
+
+                            <label asp-for="Email"></label>
+                            <input type="text" asp-for="Email" class="form-control">
+                            @*<input asp-for="Email" title="Tài khoản" class="form-control" id="email" value="" />*@
+
+                            @*<label for="password_login">Mật khẩu<span class="required">*</span></label>*@
+                            <label asp-for="Password"></label>
+                            <input id="password_login" asp-for="Password" type="password" class="form-control">
+                            @*<input asp-for="Password" title="Mật khẩu" id="pass" class="form-control" />*@
+
+                            <p class="forgot-pass"><a href="/quen-mat-khau.html">Bạn quên mật khẩu?</a></p>
+                            <button type="submit" class="button"><i class="icon-lock icons"></i>&nbsp; <span>Đăng nhập</span></button>
+                            <label class="inline" asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                            </label>
+                            @*<label class="inline" for="rememberme">
+                                <input type="checkbox" value="forever" id="rememberme" name="rememberme">
+                                Nhớ mật khẩu
+                            </label>*@
+                        </form>
+                        <section>
+                            <hr />
+                            <h2>Sử dụng tài khoản khác để đăng nhập.</h2>
+
+                            @{
+                                var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                                if (loginProviders.Count == 0)
+                                {
+                                    <div>
+                                        <p>
+                                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                            for details on setting up this ASP.NET application to support logging in via external services.
+                                        </p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                        <div>
+                                            <p>
+                                                @foreach (var provider in loginProviders)
+                                                {
+                                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                                }
+                                            </p>
+                                        </div>
+                                    </form>
+                                }
+                            }
+                        </section>
+                    </div>
+                    <div class="box-authentication">
+                        <h3>Đăng ký thành viên</h3>
+                        <p>Tạo tài khoản để mua hàng</p>
+                        <button onclick="window.location.href='/dang-ky.html'" class="button"><i class="icon-user icons"></i>&nbsp; <span>Đăng ký</span></button>
+                        @*<button class="button"><i class="icon-user icons"></i>&nbsp; <span>Đăng ký</span></button>*@
+                        <div class="register-benefits">
+                            <h4>Đăng ký hôm nay để :</h4>
+                            <ul>
+                                <li>Mua hàng nhanh chóng</li>
+                                <li>Theo dõi trạng thái đơn hàng dễ dàng</li>
+                                <li>Hưởng các chính sách cho khách hàng thân thiết</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Main Container End -->
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Danh sách Tags";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/post-tag/index.js" asp-append-version="true"></script>
+    <script>
+        var tag = new tagController();
+        tag.initialize();
+    </script>
+
+    @*<environment names="Development">
+        <script src="~/app/controllers/post/image-management.js" asp-append-version="true"></script>
+            <script src="~/app/controllers/post/quantity-management.js" asp-append-version="true"></script>
+            <script src="~/app/controllers/post/whole-price-management.js" asp-append-version="true"></script>
+        <script src="~/app/controllers/post-tag/index.js" asp-append-version="true"></script>
+        <script>
+            var tag = new tagController();
+            tag.initialize();
+        </script>
+    </environment>
+    <environment names="Staging,Production">
+        <script>
+            var tag = new tagController();
+            tag.initialize();
+        </script>
+    </environment>*@
+}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Tags bài viết</h3>
+    </div>
+
+    <div class="title_right">
+        <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right">
+
+            <div class="input-group">
+                <input type="text" id="txtSearch" class="form-control" placeholder="Tìm kiếm...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btn-search" type="button">Tìm kiếm!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12  form-group pull-right">
+            @{
+                var result = await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Create);
+            }
+            @if (result.Succeeded)
+            {
+                <button id="btnCreate" class="btn btn-success">Tạo mới</button>
+                <a class="btn btn-danger" href="~/templates/PostImportTemplate.xlsx">Mẫu nhập (Excel)</a>
+                <button class="btn btn-primary" id="btn-import" type="button"><i class="fa fa-file-excel-o"></i>Nhập (Excel)</button>
+                <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i>Xuất file (Excel)</button>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+            {
+                <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                    <i class="fa fa-trash-o"></i> Xóa nhiều
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="10%" class="align_center"><input id='mastercheckbox' type='checkbox' /></th>
+                            <th>Tên</th>
+                            <th>Thứ tự</th>
+                            <th>Meta Title</th>
+                            <th>Meta Description</th>
+                            <th>Meta Keywords</th>
+                            <th>Ngày tạo</th>
+                            <th width="20%">#</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content"></tbody>
+                </table>
+                <!--Pagination-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                            <select id="ddl-show-page">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="item-per-page">
+                                bản ghi/trang.
+                            </span>
+                            Tổng số bản ghi: <strong id="lbl-total-records"></strong>
+                        </div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                            <ul id="paginationUL"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td class="align_center"><input type="checkbox" value="{{Id}}" class="checkboxGroups" /></td>
+        <td>{{Name}}</td>
+        <td style="text-align: center;">{{SortOrder}}</td>
+        <td>{{MetaTitle}}</td>
+        <td>{{MetaDescription}}</td>
+        <td>{{MetaKeywords}}</td>
+        <td>{{DateModified}}</td>
+        <th scope="row">
+            @*@if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Update)).Succeeded)
+                {
+                    <a class="btn btn-xs btn-edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></a>
+                }*@
+            @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+            {
+                <a class="btn btn-xs btn-delete" data-id="{{Id}}"><i class="fa fa-trash"></i></a>
+            }
+        </th>
+    </tr>
+</script>
+@*@Html.Partial("_AddEditModal.cshtml")
+    @Html.Partial("_ImportExcelModal.cshtml")
+    @Html.Partial("_QuantityManagement.cshtml")
+    @Html.Partial("_ImageManagement.cshtml")
+    @Html.Partial("_WholePriceManagement.cshtml")*@
+<partial name="_AddEditModal.cshtml" />
+@*<partial name="_WholePriceManagement.cshtml" />
+    <partial name="_QuantityManagement.cshtml" />*@

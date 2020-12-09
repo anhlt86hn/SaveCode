@@ -1,0 +1,179 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+    ViewData["Title"] = "Danh sách bài viết";
+}
+@section Styles{
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/post/image-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/quantity-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/whole-price-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/post/index.js" asp-append-version="true"></script>
+    <script>
+        var post = new postController();
+        post.initialize();
+    </script>
+
+    @*<environment names="Development">
+        <script src="~/app/controllers/post/image-management.js" asp-append-version="true"></script>
+        <script src="~/app/controllers/post/quantity-management.js" asp-append-version="true"></script>
+        <script src="~/app/controllers/post/whole-price-management.js" asp-append-version="true"></script>
+        <script src="~/app/controllers/post/index.js" asp-append-version="true"></script>
+        <script>
+            var post = new postController();
+            post.initialize();
+        </script>
+    </environment>
+    <environment names="Staging,Production">
+        <script>
+            var post = new postController();
+            post.initialize();
+        </script>
+    </environment>*@
+}
+<div class="page-title">
+    <div class="title_left" style="width:10% !important;">
+        <h3>Bài viết</h3>
+    </div>
+
+    <div class="title_right" style="width: 90% !important;">
+        <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right">
+
+            <div class="input-group">
+                <input type="text" id="txtSearch" class="form-control" placeholder="Tìm kiếm...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" id="btn-search" type="button">Tìm kiếm!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12  form-group pull-right">
+            <input id="ddlPostCategoryFilter" required class="form-control" name="ddlPostCategoryFilter" value="">
+            @*<select class="form-control" id="ddlCategorySearch">
+                    <option>--Chọn danh mục--</option>
+                </select>*@
+        </div>
+        <div class="col-md-6 col-sm-12  form-group pull-right">
+            @{
+                var result = await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Create);
+            }
+            @if (result.Succeeded)
+            {
+                @*<button id="btnCreate" class="btn btn-success">Tạo mới</button>*@
+                <a href="/Admin/Post/Create" class="btn btn-info"><i class="fa fa-plus"></i><span class="hidden-xs"> Thêm mới </span></a>
+                <a class="btn btn-danger" href="~/templates/PostImportTemplate.xlsx">Mẫu nhập (Excel)</a>
+                <button class="btn btn-primary" id="btn-import" type="button"><i class="fa fa-file-excel-o"></i>Nhập (Excel)</button>
+                <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i>Xuất file (Excel)</button>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+            {
+                <button type="button" name="delete-selected" id="delete-selected" class="btn red">
+                    <i class="fa fa-trash-o"></i> Xóa nhiều
+                </button>
+            }
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="align_center" width="2.5%"><input id='mastercheckbox' type='checkbox' /></th>
+                            <th class="align_center" width="4.5%">Mã Code</th>
+                            <th class="align_center" width="10%">Tên</th>
+                            <th class="align_center" width="8%">Danh mục</th>
+                            <th class="align_center" width="2%">Hoạt động</th>
+                            <th class="align_center" width="5%">Thứ tự</th>
+                            <th class="align_center" width="14%">Tags</th>
+                            <th class="align_center" width="2%">HOT</th>
+                            <th class="align_center" width="5%">Thứ tự HOT</th>
+                            <th class="align_center" width="2%">Trang chủ</th>
+                            <th class="align_center" width="5%">Thứ tự trang chủ</th>
+                            <th class="align_center" width="8%">Url</th>
+                            <th class="align_center" width="10%">Ảnh</th>
+                            <th class="align_center" width="5%">Ngày tạo</th>
+                            <th class="align_center" width="5%">Ngày sửa</th>
+                            <th class="align_center" width="12%">Xử lý</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl-content"></tbody>
+                </table>
+                <!--Pagination-->
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                            <select id="ddl-show-page">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="item-per-page">
+                                bản ghi/trang.
+                            </span>
+                            Tổng số bản ghi: <strong id="lbl-total-records"></strong>
+                        </div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                            <ul id="paginationUL"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="table-template" type="x-tmpl-mustache">
+    <tr>
+        <td class="align_center"><input type="checkbox" value="{{Id}}" class="checkboxGroups" /></td>
+        <td class="align_center">{{Code}}</td>
+        <td class="align_center">{{Name}}</td>
+        <td class="align_center">{{CategoryName}}</td>
+        <td class="align_center">{{{Status}}}</td>
+        <td class="align_center">{{SortOrder}}</td>
+        <td class="align_center">{{Tags}}</td>
+        <td class="align_center">{{{HotFlag}}}</td>
+        <td class="align_center">{{HotOrder}}</td>
+        <td class="align_center">{{{HomeFlag}}}</td>
+        <td class="align_center">{{HomeOrder}}</td>
+        <td class="align_center">{{Url}}</td>
+        <td class="align_center">{{{Image}}}</td>
+        <td class="align_center">{{DateCreated}}</td>
+        <td class="align_center">{{DateModified}}</td>
+
+        <th class="align_center" scope="row">
+            @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Update)).Succeeded)
+            {
+                
+                <a class="btn btn-xs btn-edit" data-id="{{Id}}" href="update?id={{Id}}"><i class="fa fa-pencil"></i></a>
+                <a href="#" data-id="{{Id}}" class="btn btn-xs btn-images"><i class="fa fa-image"></i></a>
+                <a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity"><i class="fa fa-hourglass-start"></i></a>
+                <a href="#" data-id="{{Id}}" class="btn btn-xs btn-whole-price"><i class="fa fa-money"></i></a>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, "USER", Operations.Delete)).Succeeded)
+            {
+                <a class="btn btn-xs btn-delete" data-id="{{Id}}"><i class="fa fa-trash"></i></a>
+            }
+        </th>
+    </tr>
+</script>
+@*@Html.Partial("_AddEditModal.cshtml")
+    @Html.Partial("_ImportExcelModal.cshtml")
+    @Html.Partial("_QuantityManagement.cshtml")
+    @Html.Partial("_ImageManagement.cshtml")
+    @Html.Partial("_WholePriceManagement.cshtml")*@
+
+@*<partial name="_ImageManagement.cshtml" />
+<partial name="_AddEditModal.cshtml" />
+<partial name="_SelectPostCategoryModal.cshtml" />*@
+<partial name="_ImportExcelModal.cshtml" />

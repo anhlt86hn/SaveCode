@@ -1,0 +1,92 @@
+﻿<div id="modal-add-edit" class="bootbox modal fade modal-darkorange in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thêm mới/sửa tùy chỉnh</h4>
+            </div>
+            <div class="modal-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" id="frmAddOrUpdate">
+                        <div class="form-group">
+                            <input type="hidden" id="hidId" value="00000000-0000-0000-0000-000000000000" />
+                            <label for="txtName" class="col-sm-2 control-label no-padding-right">Tên tùy chỉnh*</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtName" class="form-control" id="txtName" placeholder="Tên cấu hình" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtCode" class="col-sm-2 control-label no-padding-right">Code*</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtCode" class="form-control" id="txtCode" placeholder="Code" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtUrl" class="col-sm-2 control-label no-padding-right">Url*</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtUrl" class="form-control" id="txtUrl" placeholder="Url" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtStringValue" class="col-sm-2 control-label no-padding-right">Giá trị chuỗi</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" name="txtStringValue" class="form-control" id="txtStringValue" placeholder="Chuỗi"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtIntegerValue" class="col-sm-2 control-label no-padding-right">Giá trị số nguyên (Integer)</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtIntegerValue" class="form-control" id="txtIntegerValue" placeholder="Số nguyên" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtBooleanValue" class="col-sm-2 control-label no-padding-right">Giá trị Boolean</label>
+                            <div class="col-sm-10">
+                                <select id="ddlBooleanValue" class="form-control">
+                                    <option>-------</option>
+                                    <option value="1">True</option>
+                                    <option value="0">False</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtDateValue" class="col-sm-2 control-label no-padding-right">Giá trị ngày tháng (thời gian)</label>
+                            <div class="col-sm-10">
+                                <input type="datetime" name="txtDateValue" class="form-control" id="txtDateValue" placeholder="Ngày tháng" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txtDecimalValue" class="col-sm-2 control-label no-padding-right">Giá trị số thực (Decimal)</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtDecimalValue" class="form-control" id="txtDecimalValue" placeholder="Số thực" />
+                            </div>
+                        </div>                      
+
+                        <div class="form-group">
+                            <label for="ckStatus" class="col-sm-2 control-label no-padding-right">Hoạt động</label>
+                            <div class="col-sm-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="ckStatus" id="ckStatus">
+                                        <span class="text">Kích hoạt</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                                <button type="button" id="btnCancel" data-dismiss="modal" class="btn btn-danger close">Hủy</button>
+                            </div>
+                        </div>                     
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

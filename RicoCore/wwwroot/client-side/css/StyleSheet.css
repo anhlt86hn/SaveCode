@@ -1,0 +1,167 @@
+﻿.a-title{
+    font-size: 20px !important;
+    text-decoration: none;
+    color: blue !important;
+}
+    .breadcrumbs {
+    padding: 8px 0px;
+    margin: auto;
+    font-size: 20px;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+    .breadcrumbs a {
+        color: #000000;
+    }
+
+        .breadcrumbs a:hover {
+            color: #e83f33;
+        }
+
+    .breadcrumbs span {
+        display: inline-block;
+        margin: 0 5px 0 5px;
+        color: #999;
+        font-size: 20px;
+        font-weight: normal;
+    }
+
+    .breadcrumbs strong {
+        color: #666;
+        font-weight: normal;
+    }
+
+    .breadcrumbs ul {
+        margin: 0px;
+        padding: 0px
+    }
+
+        .breadcrumbs ul li {
+            list-style-type: none;
+            display: inline
+        }
+
+#body-wrapper a {
+    color: #0072bc !important;
+}
+
+.border-bottom {
+    border-bottom: 1px #e5e5e5 solid;
+    padding-bottom: 15px;
+}
+
+
+.pagination-area {
+    background: rgba(0,0,0,0) none repeat scroll 0 0;
+    border-top: 1px solid #e5e5e5;
+    margin: 22px 0 0;
+    padding-top: 20px;
+    text-align: center;
+    display: inline-block;
+    width: 100%
+}
+
+ .pagination-area ul {
+        margin-bottom: 0px
+ }
+
+  .pagination-area ul li {
+            background: #f5f5f5;
+            color: #393939;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            height: 30px;
+            line-height: 30px;
+            margin: 0 0 0 5px;
+            width: 30px;
+        }
+
+#body-wrapper .pagination-area ul li a {
+                border: 1px solid #e5e5e5;
+                color: black !important;
+                /*color: #363636;*/
+                display: block;
+                font-size: 12px;
+                font-weight: 700;
+                height: 30px;
+                width: 30px;
+                text-decoration: none;
+                transition: all .4s ease-out .2s;
+                border-radius: 3px;
+}
+
+.pagination-area ul li a:hover {
+    background: #2ab1ce;
+    border: 1px solid #e83f33;
+    color: #fff;
+}
+
+.pagination-area ul li a.active {
+    background: #2ab1ce;
+    /*background: #e83f33;*/
+    /*border: 1px solid #e83f33;*/
+    color: #fff;
+    transition: all .4s ease-out .2s;
+}
+
+.cell-unit{
+    overflow: hidden;
+    min-height:68px;
+    max-height: 120px;
+    margin-bottom: 10px;
+}
+
+.border-cell {
+    border: 1px solid #dddddd;    
+    float: left;
+    text-align: center;    
+}
+
+    .border-cell.heading {
+        height: 60px;
+        line-height: 60px;
+    }
+    .border-cell.cell-ok {
+        height: 30px;
+        line-height: 30px;
+    }
+.heading-no-align-middle {
+    height: 60px;
+}
+.percents2 {
+    width: 2%;
+}
+.percents3 {
+    width: 3%;
+}
+.percents4 {
+    width: 4%;
+}
+    .percents5 {
+        width: 5%;
+    }
+.percents10 {
+    width: 10%;
+}
+.percents12 {
+    width: 12%;
+}
+.percents13 {
+    width: 13%;
+}
+.percents15 {
+    width: 15%;
+}
+.percents16 {
+    width: 16%;
+}
+.percents17 {
+    width: 17%;
+}
+.percents19 {
+    width: 19%;
+}
+.percents20 {
+    width: 20%;
+}

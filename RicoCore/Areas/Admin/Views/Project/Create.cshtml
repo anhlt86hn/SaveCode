@@ -1,0 +1,96 @@
+﻿@using RicoCore.Services.Systems.Projects.Dtos;
+@model ProjectViewModel
+@section Scripts{
+    <script src="~/app/controllers/project/create.js" asp-append-version="true"></script>
+    <script>
+        var createProject = new createProjectController();
+        createProject.initialize();
+    </script>
+}
+@section Styles{
+    <style>
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
+    </style>
+}
+    <form action="/admin/project/create" method="post" class="form-horizontal" role="form" id="frmAdd" enctype="multipart/form-data">
+        <a class="btn btn-info" href="javascript:void(0);" onclick="window.history.go(-1);"><i class="fa fa-backward"></i>&nbsp;Trở lại</a>
+        <button type="submit" id="btnSave" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;Lưu</button>
+        <button type="button" id="btnReset" data-dismiss="modal" class="btn btn-danger btn-cancel">Reset</button>
+
+        <h1>Thêm mới Dự án</h1>
+        <div asp-validation-summary="ModelOnly">
+            <span>Sửa những lỗi sau:</span>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label class="control-label no-padding-right text-left">Tên dự án*</label>
+            </div>
+            <div class="col-sm-12">
+                <input asp-for="Name" class="form-control text-left" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label class="control-label no-padding-right text-left">Url</label>
+            </div>
+            <div class="col-sm-12">
+                <input asp-for="Url" class="form-control text-left" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label class="control-label no-padding-right text-left">Thứ tự*</label>
+            </div>
+            <div class="col-sm-12">
+                <input asp-for="SortOrder" class="form-control text-left" />
+                <span asp-validation-for="SortOrder"></span>
+                <input type="hidden" id="hidSortOrder" name="hidSortOrder" />
+                @*<input type="number" class="form-control" id="txtSortOrder" name="txtSortOrder">*@
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <label class="control-label no-padding-right text-left">Hoạt động</label>
+                <input asp-for="IsActive" />
+                <span asp-validation-for="IsActive"></span>
+            </div>            
+        </div>
+
+        <div class="form-group">
+            <label class="control-label no-padding-right text-left">Ảnh</label>
+            <div class="input-group">
+                <input type="text" asp-for="Source" class="form-control" />
+                <input type="file" id="fileInputImage" style="display:none" />
+                <span class="input-group-btn">
+                    <input type="button" id="btnSelectImg" class="btn btn-default" value="Browser" />
+                </span>
+                <span asp-validation-for="Source"></span>
+            </div>
+        </div>
+
+        @*<div class="col-sm-6">
+            <form method="post" asp-controller="Admin/Upload" asp-action="ImageUpload" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="Image" class="control-label no-padding-right">Ảnh*</label>
+                    <input asp-for="Image" type="file" class="form-control custom-file-input" name="file" />
+                    <label class="custom-file-input">Chọn ảnh...</label>
+                    </div>
+                <button type="submit">Upload</button>
+                <img src="@ViewData["FileLocation"]" width="300" height="200" />
+            </form>
+        </div>*@
+    </form>
