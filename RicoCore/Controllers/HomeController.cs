@@ -21,22 +21,24 @@ namespace RicoCore.Controllers
     {       
         private readonly ICommonService _commonService;
         private readonly IConfiguration _configuration;
-        private readonly IStringLocalizer<HomeController> _localizer;
+        //private readonly IStringLocalizer<HomeController> _localizer;
 
         public HomeController(ICommonService commonService,
-            IConfiguration configuration, IStringLocalizer<HomeController> localizer)
+            IConfiguration configuration 
+            //IStringLocalizer<HomeController> localizer
+            )
         {         
             _configuration = configuration;
             _commonService = commonService;
-            _localizer = localizer;
+            //_localizer = localizer;
         }
 
         public IActionResult Index()
         {
                 //var title = _localizer["HomeMetaTitle"];
                 //var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-                ViewData["BodyClass"] = "cms-index-index cms-home-page";                           
-                return Redirect("/admin");
+                //ViewData["BodyClass"] = "cms-index-index cms-home-page";                           
+                return Redirect("/login");
         }
 
         public IActionResult About()

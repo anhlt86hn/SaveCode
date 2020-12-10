@@ -65,13 +65,11 @@
             dateType: 'json',
             url: '/admin/login/authen',
             success: function (res) {
-                if (res.Success) {
-                    window.location.href = "/Admin/Account/LoginWith2fa";
-                    //window.location.href = "/Admin/Home/Index";
+                if (res.Success) {                   
+                    window.location.href = "/Admin/Home/Index";
                 }
-                else {
-                    aspnetcore.notify('Đăng nhập không đúng', 'error');
-                    //aspnetcore.notify('Login failed', 'error');                    
+                else {                    
+                    aspnetcore.notify('Login failed', 'error');                    
                 }
             }
         })

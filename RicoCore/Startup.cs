@@ -111,6 +111,49 @@ namespace RicoCore
             services.AddSingleton(Mapper.Configuration); // using AutoMapper;
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
+            services.AddMvc(options =>
+            {
+                options.CacheProfiles.Add("Default",
+                    new CacheProfile()
+                    {
+                        Duration = 60
+                    });
+                options.CacheProfiles.Add("Never",
+                    new CacheProfile()
+                    {
+                        Location = ResponseCacheLocation.None,
+                        NoStore = true
+                    });
+            }).AddViewLocalization(
+                    LanguageViewLocationExpanderFormat.Suffix,
+                    opts => { opts.ResourcesPath = "Resources"; })
+                .AddDataAnnotationsLocalization();
+
+            // DefaultContractResolver()           
+            // using Newtonsoft.Json.Serialization;
+            // giai quyet Issue: GenericResult class tra ve null vi Json tu*. chuyen^? sang cu' phap' Camel (chu~ cai' dau tien tro thanh viet thuo`ng)
+
+            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+            //services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+
+            //services.Configure<RequestLocalizationOptions>(
+            //  opts =>
+            //  {
+            //      var supportedCultures = new List<CultureInfo>
+            //      {
+            //          new CultureInfo("vi-VN"),
+            //          new CultureInfo("en-US")                        
+            //      };
+
+            //      opts.DefaultRequestCulture = new RequestCulture("vi-VN");
+            //      // Formatting numbers, dates, etc.
+            //      opts.SupportedCultures = supportedCultures;
+            //      // UI strings that we have localized.
+            //      opts.SupportedUICultures = supportedCultures;
+            //  });
+
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Add Razor Pages
             services.AddRazorPages()
@@ -150,51 +193,7 @@ namespace RicoCore
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
 
             // Initialize Seed Data
-            services.AddTransient<DbInitializer>();
-
-            //services.AddMvc(options =>
-            //    {
-            //        options.CacheProfiles.Add("Default",
-            //            new CacheProfile()
-            //            {
-            //                Duration = 60
-            //            });
-            //        options.CacheProfiles.Add("Never",
-            //            new CacheProfile()
-            //            {
-            //                Location = ResponseCacheLocation.None,
-            //                NoStore = true
-            //            });
-            //    }).AddViewLocalization(
-            //        LanguageViewLocationExpanderFormat.Suffix,
-            //        opts => { opts.ResourcesPath = "Resources"; })
-            //    .AddDataAnnotationsLocalization()
-
-                // DefaultContractResolver()           
-                // using Newtonsoft.Json.Serialization;
-                // giai quyet Issue: GenericResult class tra ve null vi Json tu*. chuyen^? sang cu' phap' Camel (chu~ cai' dau tien tro thanh viet thuo`ng)
-
-                //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-            //services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
-
-            //services.Configure<RequestLocalizationOptions>(
-            //  opts =>
-            //  {
-            //      var supportedCultures = new List<CultureInfo>
-            //      {
-            //          new CultureInfo("vi-VN"),
-            //          new CultureInfo("en-US")                        
-            //      };
-
-            //      opts.DefaultRequestCulture = new RequestCulture("vi-VN");
-            //      // Formatting numbers, dates, etc.
-            //      opts.SupportedCultures = supportedCultures;
-            //      // UI strings that we have localized.
-            //      opts.SupportedUICultures = supportedCultures;
-            //  });
-
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<DbInitializer>();            
 
             //Register for service
             ServiceRegister.Register(services);
@@ -204,7 +203,7 @@ namespace RicoCore
             {
                 builder.AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowAnyOrigin()        
+                //.AllowAnyOrigin()
                 //.WithOrigins("http://rem.songkhoe.co", "https://rem.songkhoe.co")                
                 .AllowCredentials();
             }));

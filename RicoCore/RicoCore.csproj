@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\Account\**" />
+    <Content Remove="Areas\Admin\Views\Account\**" />
+    <EmbeddedResource Remove="Areas\Admin\Views\Account\**" />
+    <None Remove="Areas\Admin\Views\Account\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Remove="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Remove="Extensions\ImageResizerMiddlewareExtensions.cs" />
     <Compile Remove="Extensions\MinResponseExtensions.cs" />
     <Compile Remove="Extensions\UrlHelperExtensions.cs" />
@@ -14,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Remove="Views\Account\AccessDenied.cshtml" />
     <Content Remove="Views\Account\ConfirmEmail.cshtml" />
     <Content Remove="Views\Account\ExternalLogin.cshtml" />
@@ -62,6 +72,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Login\" />
     <Folder Include="Logs\" />
     <Folder Include="Middlewares\" />
     <Folder Include="Models\MenuViewModels\" />
