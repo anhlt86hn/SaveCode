@@ -10,8 +10,10 @@ namespace RicoCore.Areas.Admin.Controllers
 {
     [Authorize]
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class HomeController : BaseController
     {
+        
         public IActionResult Index()
         {       
             var email = User.GetSpecificClaim("Email");

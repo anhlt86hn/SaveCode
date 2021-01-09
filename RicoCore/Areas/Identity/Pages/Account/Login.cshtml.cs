@@ -68,8 +68,10 @@ namespace RicoCore.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-
+            //returnUrl = returnUrl ?? Url.Content("~/");
+            //returnUrl = Url.Content("~/Admin/Home/Index") ?? Url.Content("~/");
+            //returnUrl = Url.Action("Index", "Home", new { Area = "Admin" });
+            returnUrl = Url.Content("~/Admin/Home/Index") ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -78,7 +80,7 @@ namespace RicoCore.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return LocalRedirect(returnUrl);                   
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RicoCore.Areas.Admin.Controllers
 {
-    [Authorize]
-    [Area("Admin")]
+    //[Authorize]
+    //[Area("Admin")]
     public class BaseController : Controller
     {
 
