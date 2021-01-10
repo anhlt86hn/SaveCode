@@ -25,7 +25,8 @@
     <link href="~/admin-side/css/custom.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
     <!-- Custom Common Style -->
-    <link href="~/admin-side/css/site.css" rel="stylesheet" />
+    <link href="~/admin-side/css/site.css" rel="stylesheet" />    
+    <link href="~/lib/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet" />
 </head>
 
 <body class="nav-md">
@@ -194,7 +195,8 @@
     <script src="~/lib/notify/styles/metro/notify-metro.js"></script>
     <script src="~/lib/bootbox.js/bootbox.js"></script>
     <script src="~/lib/ckeditor/ckeditor.js"></script>
-
+    <script src="~/lib/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script src="~/app/shared/aspnetcore.js"></script>
 
     <!-- Custom Theme Scripts -->

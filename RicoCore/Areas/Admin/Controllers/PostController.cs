@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -20,6 +21,8 @@ using System.Net.Http.Headers;
 
 namespace RicoCore.Areas.Admin.Controllers
 {
+    [Authorize]
+    [Area("Admin")]
     public class PostController : BaseController
     {
         private readonly IPostCategoryService _postCategoryService;
